@@ -1,5 +1,4 @@
-let x: number = 10;
-let y: number = 10;
-let sum = x + y;
-
-console.log(sum)
+const add = (num1:number, num2:number) :number => {
+    return (num1 + num2);
+};
+console.log(add(2, 4));

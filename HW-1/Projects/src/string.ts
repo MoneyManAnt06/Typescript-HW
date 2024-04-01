@@ -1,5 +1,6 @@
-let string1: string = "Anthony"
-let string2: string = "Lopez"
-let fullString = `${string1} ${string2}`
+const concactenate = (str1: string, str2: string) => {
+    let fullString = `${str1} ${str2}`
+    return(fullString)
+}
 
-console.log(fullString)
+console.log(concactenate("ant","man"))

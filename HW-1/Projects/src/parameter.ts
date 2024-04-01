@@ -1,8 +1,13 @@
 //Tipado de parámetros y retorno: Implementa una función que tome un nombre (cadena) y una edad (número)
 //como parámetros y devuelva un objeto con estos datos.
 
-const parameter = (name: string, age: number): object => {
-    return {name, age}
+type Person = {
+    name: string, 
+    age: number
 }
 
-console.log(parameter("Anthony", 23))
+const parameter = (person:Person): Person => {
+    return person
+}
+
+console.log(parameter({name:"Anthony", age:23}))
