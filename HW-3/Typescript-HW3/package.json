@@ -1,0 +1,10 @@
+{
+  "name": "Typescript-HW3",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.12.2",
+    "typescript": "^5.4.3"
+  }
+}
