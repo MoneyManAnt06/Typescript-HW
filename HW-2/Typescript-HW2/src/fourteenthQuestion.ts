@@ -13,8 +13,24 @@ class Engine {
     }
 }
 
-class SecondCar extends Engine {}
+class SecondCar extends Engine {
+    engine: string;
 
-const car = new SecondCar()
+    constructor(engine: string){
+        super()
+        this.engine = engine
+
+    }
+
+    start(): void {
+        console.log(`Your ${this.engine} has started`)
+    }
+
+    stop(): void {
+        console.log(`Your ${this.engine} has stopped`)
+    }
+}
+
+const car = new SecondCar("v8")
 car.start()
 car.stop()

@@ -4,25 +4,32 @@
 // c. Crea una instancia del diccionario, añade elementos y prueba los métodos de acceso y visualización.
 
 
-// interface Dictionary {
-//     [key: string]: string;
-//   }
+interface Dictionary {
+    [key: string]: string;
+  }
   
-//   class Text {
-//     values: Dictionary;
-//     constructor(){
-//         this.values = {}
-//     }
+  class Text2 {
+    values: Dictionary;
+    constructor(){
+        this.values = {}
+    }
 
-//     set(key:string, value:string) {
-//         value
-//     }
+    set(value:string) {
+        this.values = {...this.values, [value]: value}
+    }
 
-//     get(key:string){
-//        return this.values[key]
-//     }
+    get(key:string){
+       console.log(this.values[key])
+    }
 
-//     getall(){
+    getall(){
+        console.log(this.values)
+    }
+  }
 
-//     }
-//   }
+  const dictionary = new Text2()
+  dictionary.set("hello world")
+  dictionary.set("cool world")
+  dictionary.set("goodbye world")
+  dictionary.get("hello world")
+  dictionary.getall()
