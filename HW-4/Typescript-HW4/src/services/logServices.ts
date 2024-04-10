@@ -18,6 +18,4 @@ export default class LogServices {
   }
 }
 
-const logServices = new LogServices();
-
-logServices.createLog('first log');
+// logServices.createLog('first log');

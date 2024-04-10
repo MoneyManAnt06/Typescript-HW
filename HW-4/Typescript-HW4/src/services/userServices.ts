@@ -1,5 +1,6 @@
 import User from '../classes/User';
 import { createClient } from '../client';
+import { logDecorator } from '../decorators/logDecorator';
 
 export default class UserServices {
   async getUser(): Promise<User[]> {
@@ -13,6 +14,7 @@ export default class UserServices {
     return user;
   }
 
+  @logDecorator()
   async createUser(
     name: string,
     lastName: string,

@@ -1,7 +1,10 @@
 import Note from '../classes/Note';
 import { createClient } from '../client';
+import { logDecorator } from '../decorators/logDecorator';
+import { required } from '../decorators/requiredDecorator';
+import { validate } from '../decorators/validateDecorator';
 
-export default class noteServices {
+export default class NoteServices {
   async getNote(): Promise<Note[]> {
     const supabase = createClient();
 
@@ -13,7 +16,10 @@ export default class noteServices {
     return Note;
   }
 
+  @validate
+  @logDecorator()
   async createNote(
+    @required
     title: string,
     description: string,
     user_id: number
@@ -63,3 +69,6 @@ export default class noteServices {
     return 'The note was deleted!!!';
   }
 }
+
+const noteServices = new NoteServices();
+noteServices.createNote('', 'EWdfdsafsdf', 1);
