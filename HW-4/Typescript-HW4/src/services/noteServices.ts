@@ -1,6 +1,7 @@
 import Note from '../classes/Note';
 import { createClient } from '../client';
 import { logDecorator } from '../decorators/logDecorator';
+import { minLength } from '../decorators/minLengthDecorator';
 import { required } from '../decorators/requiredDecorator';
 import { validate } from '../decorators/validateDecorator';
 
@@ -20,6 +21,7 @@ export default class NoteServices {
   @logDecorator()
   async createNote(
     @required
+    @minLength
     title: string,
     description: string,
     user_id: number
@@ -71,4 +73,4 @@ export default class NoteServices {
 }
 
 const noteServices = new NoteServices();
-noteServices.createNote('note1', 'EWdfdsafsdf', 1);
+noteServices.createNote('note 1', 'EWdfdsafsdf', 1);

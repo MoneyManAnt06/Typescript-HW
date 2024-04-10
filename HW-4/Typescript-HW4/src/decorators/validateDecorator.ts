@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import { requiredMetadataKey } from './requiredDecorator';
 import { emailMetadataKey } from './emailDecorator';
+import { minLengthMetadataKey } from './minLengthDecorator';
 
 export function validate(
   target: any,
@@ -34,7 +35,23 @@ export function validate(
           parameterIndex >= arguments.length ||
           !emailValid.test(arguments[parameterIndex])
         ) {
-          throw new Error('Missing required argument.');
+          throw new Error('Invalid email.');
+        }
+      }
+    }
+
+    const minLengthParameters: number[] = Reflect.getOwnMetadata(
+      minLengthMetadataKey,
+      target,
+      propertyName
+    );
+    if (minLengthParameters) {
+      for (let parameterIndex of minLengthParameters) {
+        if (
+          parameterIndex >= arguments.length ||
+          arguments[parameterIndex].length < 3
+        ) {
+          throw new Error('Invalid min length.');
         }
       }
     }
