@@ -71,4 +71,4 @@ export default class NoteServices {
 }
 
 const noteServices = new NoteServices();
-noteServices.createNote('', 'EWdfdsafsdf', 1);
+noteServices.createNote('note1', 'EWdfdsafsdf', 1);

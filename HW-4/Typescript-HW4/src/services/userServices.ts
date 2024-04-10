@@ -1,6 +1,9 @@
 import User from '../classes/User';
 import { createClient } from '../client';
+import { email } from '../decorators/emailDecorator';
 import { logDecorator } from '../decorators/logDecorator';
+import { required } from '../decorators/requiredDecorator';
+import { validate } from '../decorators/validateDecorator';
 
 export default class UserServices {
   async getUser(): Promise<User[]> {
@@ -13,11 +16,13 @@ export default class UserServices {
     }
     return user;
   }
-
+  @validate
   @logDecorator()
   async createUser(
+    @required
     name: string,
     lastName: string,
+    @email
     email: string
   ): Promise<User> {
     const supabase = createClient();
