@@ -1,28 +1,28 @@
-import User from '../classes/User';
+import Note from '../classes/Note';
 import { createClient } from '../client';
 
-export default class UserServices {
-  async getUser(): Promise<User[]> {
+export default class noteServices {
+  async getNote(): Promise<Note[]> {
     const supabase = createClient();
 
-    const { data: user, error } = await supabase.from('User').select();
+    const { data: Note, error } = await supabase.from('Note').select();
 
     if (error) {
       throw new Error(error.message);
     }
-    return user;
+    return Note;
   }
 
-  async createUser(
-    name: string,
-    lastName: string,
-    email: string
-  ): Promise<User> {
+  async createNote(
+    title: string,
+    description: string,
+    user_id: number
+  ): Promise<Note> {
     const supabase = createClient();
 
     const { data, error } = await supabase
-      .from('User')
-      .insert([{ name, lastName, email }])
+      .from('Note')
+      .insert([{ title, description, user_id }])
       .select()
       .single();
 
@@ -32,17 +32,17 @@ export default class UserServices {
     return data;
   }
 
-  async updateUser(
-    name: string,
-    lastName: string,
-    email: string,
+  async updateNote(
+    title: string,
+    description: string,
+    user_id: number,
     id: number
-  ): Promise<User> {
+  ): Promise<Note> {
     const supabase = createClient();
 
     const { data, error } = await supabase
       .from('User')
-      .update({ name, lastName, email })
+      .update({ title, description, user_id })
       .eq('id', id)
       .select()
       .single();
@@ -53,17 +53,13 @@ export default class UserServices {
     return data;
   }
 
-  async deleteIntern(id: number): Promise<string> {
+  async deleteNote(id: number): Promise<string> {
     const supabase = createClient();
 
-    const { error } = await supabase.from('User').delete().eq('id', id);
+    const { error } = await supabase.from('Note').delete().eq('id', id);
     if (error) {
       throw new Error(error.message);
     }
     return 'The note was deleted!!!';
   }
 }
-
-const userServices = new UserServices();
-
-userServices.createUser('Anthony', 'Lopez', 'Anthony.lopez@gmail.com');
