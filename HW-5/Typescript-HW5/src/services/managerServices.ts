@@ -1,5 +1,8 @@
 import Manager from '../classes/Manager';
 import { createClient } from '../client';
+import { logDecorator } from '../decorators/logDecorator';
+import { minLength } from '../decorators/minLengthDecorator';
+import { required } from '../decorators/requiredDecorator';
 
 export class managerServices {
   async getManager() {
@@ -9,24 +12,53 @@ export class managerServices {
     return managers;
   }
 
-  async createManager(manager: Manager) {
+  @logDecorator('created', 'Manager')
+  async createManager(
+    @required
+    age: string,
+    @required
+    @minLength
+    name: string,
+    @required
+    role: string,
+    @required
+    department: string,
+    @required
+    expierence: number,
+    @required
+    id: number
+  ) {
     const supabase = createClient();
 
     const { data, error } = await supabase
       .from('managers')
-      .insert([{ ...manager }])
+      .insert([{ age, name, role, department, expierence, id }])
       .select()
       .single();
 
     return data;
   }
 
-  async updateIntern(manager: Manager, id: number) {
+  @logDecorator('updated', 'Manager')
+  async updateIntern(
+    @required
+    age: string,
+    @required
+    name: string,
+    @required
+    role: string,
+    @required
+    department: string,
+    @required
+    expierence: number,
+    @required
+    id: number
+  ) {
     const supabase = createClient();
 
     const { data, error } = await supabase
       .from('managers')
-      .update({ ...manager })
+      .update({ age, name, role, department, expierence })
       .eq('id', id)
       .select()
       .single();
@@ -34,6 +66,7 @@ export class managerServices {
     return data;
   }
 
+  @logDecorator('deleted', 'Manager')
   async deleteManager(id: number) {
     const supabase = createClient();
 

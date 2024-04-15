@@ -1,3 +1,4 @@
+import { minLength } from '../decorators/minLengthDecorator';
 import { InternType } from '../types';
 
 export default class Intern implements InternType {

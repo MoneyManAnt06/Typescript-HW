@@ -1,6 +1,10 @@
 import Intern from '../classes/Intern';
 import { createClient } from '../client';
+import { checkLength } from '../decorators/checkLength';
 import { logDecorator } from '../decorators/logDecorator';
+import { minLength } from '../decorators/minLengthDecorator';
+import { required } from '../decorators/requiredDecorator';
+import { validate } from '../decorators/validateDecorator';
 
 export class InternServices {
   async getIntern() {
@@ -10,25 +14,53 @@ export class InternServices {
     return intern;
   }
 
-  async createIntern(intern: Intern) {
+  @validate
+  @logDecorator('created', 'Intern')
+  async createIntern(
+    @required
+    age: number,
+    @required
+    name: string,
+    @required
+    role: string,
+    @required
+    resume: string,
+    @required
+    mentor: string
+  ) {
     const supabase = createClient();
 
     const { data, error } = await supabase
       .from('intern')
-      .insert([{ ...intern }])
+      .insert([{ age, name, role, resume, mentor }])
       .select()
       .single();
 
     return data;
   }
 
+  @validate
   @logDecorator('updated', 'Intern')
-  async updateIntern(intern: Intern, id: number) {
+  async updateIntern(
+    @required
+    age: number,
+    @required
+    @minLength
+    name: string,
+    @required
+    role: string,
+    @required
+    resume: string,
+    @required
+    mentor: string,
+    @required
+    id: number
+  ) {
     const supabase = createClient();
 
     const { data, error } = await supabase
       .from('intern')
-      .update({ ...intern })
+      .update({ age, name, role, resume, mentor, id })
       .eq('id', id)
       .select()
       .single();
@@ -36,6 +68,7 @@ export class InternServices {
     return data;
   }
 
+  @logDecorator('deleted', 'Intern')
   async deleteIntern(id: number) {
     const supabase = createClient();
 
@@ -47,13 +80,4 @@ export class InternServices {
 }
 
 const updatedIntern = new InternServices();
-updatedIntern.updateIntern(
-  {
-    age: 23,
-    mentor: 'trapito',
-    name: 'anthony',
-    resume: 'dfsfaf',
-    role: 'junior',
-  },
-  1
-);
+updatedIntern.updateIntern(24, 'ot', 'developer', 'cold caller', 'Jorge', 1);
