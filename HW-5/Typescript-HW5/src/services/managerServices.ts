@@ -4,7 +4,7 @@ import { logDecorator } from '../decorators/logDecorator';
 import { minLength } from '../decorators/minLengthDecorator';
 import { required } from '../decorators/requiredDecorator';
 
-export class managerServices {
+export class ManagerServices {
   async getManager() {
     const supabase = createClient();
 
@@ -15,7 +15,7 @@ export class managerServices {
   @logDecorator('created', 'Manager')
   async createManager(
     @required
-    age: string,
+    age: number,
     @required
     @minLength
     name: string,
@@ -40,9 +40,9 @@ export class managerServices {
   }
 
   @logDecorator('updated', 'Manager')
-  async updateIntern(
+  async updateManager(
     @required
-    age: string,
+    age: number,
     @required
     name: string,
     @required

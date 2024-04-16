@@ -78,6 +78,3 @@ export class InternServices {
     }
   }
 }
-
-const updatedIntern = new InternServices();
-updatedIntern.updateIntern(24, 'ot', 'developer', 'cold caller', 'Jorge', 1);
