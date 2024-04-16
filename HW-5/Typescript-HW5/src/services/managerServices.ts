@@ -3,6 +3,7 @@ import { createClient } from '../client';
 import { logDecorator } from '../decorators/logDecorator';
 import { minLength } from '../decorators/minLengthDecorator';
 import { required } from '../decorators/requiredDecorator';
+import { validate } from '../decorators/validateDecorator';
 
 export class ManagerServices {
   async getManager() {
@@ -12,6 +13,7 @@ export class ManagerServices {
     return managers;
   }
 
+  @validate
   @logDecorator('created', 'Manager')
   async createManager(
     @required
@@ -24,26 +26,26 @@ export class ManagerServices {
     @required
     department: string,
     @required
-    expierence: number,
-    @required
-    id: number
+    expierence: number
   ) {
     const supabase = createClient();
 
     const { data, error } = await supabase
       .from('managers')
-      .insert([{ age, name, role, department, expierence, id }])
+      .insert([{ age, name, role, department, expierence }])
       .select()
       .single();
 
     return data;
   }
 
+  @validate
   @logDecorator('updated', 'Manager')
   async updateManager(
     @required
     age: number,
     @required
+    @minLength
     name: string,
     @required
     role: string,
@@ -66,6 +68,7 @@ export class ManagerServices {
     return data;
   }
 
+  @validate
   @logDecorator('deleted', 'Manager')
   async deleteManager(id: number) {
     const supabase = createClient();

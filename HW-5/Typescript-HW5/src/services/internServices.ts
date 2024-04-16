@@ -20,6 +20,7 @@ export class InternServices {
     @required
     age: number,
     @required
+    @minLength
     name: string,
     @required
     role: string,
@@ -68,6 +69,7 @@ export class InternServices {
     return data;
   }
 
+  @validate
   @logDecorator('deleted', 'Intern')
   async deleteIntern(id: number) {
     const supabase = createClient();
