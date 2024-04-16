@@ -1,5 +1,4 @@
 import { InternServices } from './internServices';
-import LogServices from './logServices';
 import { ManagerServices } from './managerServices';
 
 const initIndex = async () => {
@@ -11,9 +10,10 @@ const initIndex = async () => {
     'cold caller',
     'Lucho'
   );
-  await updatedIntern.updateIntern(
+
+  const test = await updatedIntern.updateIntern(
     24,
-    'otto',
+    'ana',
     'developer',
     'cold caller',
     'Jorge',
@@ -40,6 +40,7 @@ const initIndex = async () => {
   );
 
   console.log(updatedManager);
+  console.log(test);
 
   // managerServices.deleteManager(1)
 };
