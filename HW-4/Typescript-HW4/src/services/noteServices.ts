@@ -71,6 +71,3 @@ export default class NoteServices {
     return 'The note was deleted!!!';
   }
 }
-
-const noteServices = new NoteServices();
-noteServices.createNote('note 1', 'EWdfdsafsdf', 1);

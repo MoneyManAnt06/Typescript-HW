@@ -17,5 +17,3 @@ export default class LogServices {
     return data;
   }
 }
-
-// logServices.createLog('first log');

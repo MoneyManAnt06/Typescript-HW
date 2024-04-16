@@ -70,7 +70,3 @@ export default class UserServices {
     return 'The note was deleted!!!';
   }
 }
-
-const userServices = new UserServices();
-
-userServices.createUser('Anthony', 'Lopez', 'Anthony.lopez@gmail.com');
